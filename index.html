@@ -19,20 +19,20 @@
             position: relative;
         }
 
-        /* Letras pequeñas rectas en la parte inferior */
+        /* Letras pequeñas rectas en la parte inferior - CORREGIDO */
         .border-text {
             position: fixed;
-            bottom: 25px;
+            bottom: 15px; /* Más pegado al borde */
             left: 0;
             width: 100%;
             text-align: center;
             font-size: 13px;
-            color: rgba(255, 255, 255, 0.5);
+            color: rgba(255, 255, 255, 0.7);
             letter-spacing: 3px;
             pointer-events: none;
-            z-index: 5;
+            z-index: 20; /* ¡AQUÍ ESTÁ LA SOLUCIÓN! Mayor a 10 para estar al frente */
             font-family: 'Georgia', serif;
-            text-shadow: 0 0 5px rgba(255,255,255,0.2);
+            text-shadow: 0px 2px 4px rgba(0,0,0,0.8); /* Sombra oscura para que resalte más */
         }
 
         /* Contenedor de corazones de fondo */
@@ -67,7 +67,7 @@
             border-radius: 25px;
             padding: 40px 30px;
             text-align: center;
-            z-index: 10;
+            z-index: 10; /* La tarjeta es la capa 10 */
             max-width: 90%;
             width: 420px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
@@ -240,7 +240,8 @@
             h1 { font-size: 1.8em; }
             .glass-card { padding: 30px 20px; }
             .media-container { height: 230px; }
-            .border-text { font-size: 10px; bottom: 15px; } /* Ajuste para celular */
+            /* Se mantiene el z-index alto también en celulares */
+            .border-text { font-size: 10px; bottom: 10px; z-index: 20; }
             .surprise-text { font-size: 2.5em; }
             .surprise-heart { font-size: 80px; }
         }
