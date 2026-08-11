@@ -1,1 +1,326 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Felices 2 Meses, Karen ❤️</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* Fondo romántico de noche estrellada */
+            background: linear-gradient(to bottom, #1a0b2e, #4b1d52, #e55d87);
+            color: white;
+            font-family: 'Arial', sans-serif;
+            overflow: hidden;
+            position: relative;
+        }
 
+        /* Contenedor de corazones flotantes */
+        .hearts-container {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .heart {
+            position: absolute;
+            bottom: -50px;
+            font-size: 20px;
+            animation: floatUp linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes floatUp {
+            to {
+                transform: translateY(-120vh) rotate(360deg);
+            }
+        }
+
+        /* Tarjeta principal con efecto cristal */
+        .glass-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(15px);
+            -webkit-backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            border-radius: 20px;
+            padding: 40px 30px;
+            text-align: center;
+            z-index: 10;
+            max-width: 90%;
+            width: 400px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            margin: 0 0 10px 0;
+            font-size: 2.2em;
+            color: #ff9a9e;
+            font-family: 'Georgia', serif;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+        }
+
+        /* Contador de tiempo */
+        .counter {
+            font-size: 1.2em;
+            margin-bottom: 25px;
+            color: #fdfbfb;
+            background: rgba(0,0,0,0.2);
+            padding: 10px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        /* Contenedor dinámico de fotos/gifs */
+        .media-container {
+            margin: 20px 0;
+            height: 250px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .media-element {
+            max-width: 100%;
+            max-height: 100%;
+            border-radius: 15px;
+            border: 3px solid #ff9a9e;
+            box-shadow: 0 0 20px rgba(255, 154, 158, 0.5);
+            transition: all 0.5s ease;
+        }
+
+        .message-text {
+            font-size: 1.3em;
+            margin: 20px 0;
+            font-style: italic;
+            min-height: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        /* Botón para avanzar */
+        .next-btn {
+            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            border: none;
+            padding: 12px 30px;
+            border-radius: 25px;
+            font-size: 1.1em;
+            font-weight: bold;
+            color: #4b1d52;
+            cursor: pointer;
+            box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .next-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 8px 20px rgba(255, 154, 158, 0.6);
+        }
+
+        /* Botón de música */
+        .music-btn {
+            position: fixed;
+            bottom: 20px;
+            left: 20px;
+            z-index: 100;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(5px);
+            border: 2px solid white;
+            border-radius: 50%;
+            width: 60px;
+            height: 60px;
+            font-size: 25px;
+            cursor: pointer;
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .music-btn.playing {
+            background: rgba(255, 154, 158, 0.5);
+            border-color: #ff9a9e;
+            box-shadow: 0 0 15px #ff9a9e;
+        }
+
+        @media (max-width: 768px) {
+            h1 { font-size: 1.8em; }
+            .counter { font-size: 1em; }
+            .media-container { height: 200px; }
+            .message-text { font-size: 1.1em; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Contenedor de corazones -->
+    <div class="hearts-container" id="hearts"></div>
+
+    <!-- Tarjeta principal -->
+    <div class="glass-card">
+        <h1>Felices 2 Meses, Karen ❤️</h1>
+        
+        <!-- Contador -->
+        <div class="counter" id="timeCounter">Calculando nuestro tiempo...</div>
+
+        <!-- Contenedor de Imagen/GIF -->
+        <div class="media-container">
+            <img src="https://media1.tenor.com/m/UEH1LnwmU18AAAAd/cute-love.gif" 
+                 alt="Momento especial" 
+                 class="media-element" 
+                 id="mainMedia">
+        </div>
+
+        <!-- Mensaje -->
+        <div class="message-text" id="messageText">
+            "Desde el 11 de junio, mis días tienen un color diferente gracias a ti."
+        </div>
+
+        <!-- Botón -->
+        <button class="next-btn" onclick="nextMemory()">
+            Siguiente recuerdo ✨
+        </button>
+    </div>
+
+    <!-- Botón de música -->
+    <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
+    
+    <!-- AUDIO: Coloca aquí el enlace a su canción -->
+    <audio id="backgroundMusic" loop style="display: none;">
+        <source src="TU_ENLACE_A_LA_CANCION_AQUI.mp3" type="audio/mpeg">
+    </audio>
+
+    <script>
+        // --- 1. CONFIGURACIÓN DE LOS MENSAJES Y FOTOS ---
+        // Aquí puedes mezclar GIFs de internet con fotos tuyas de GitHub
+        const memories = [
+            {
+                media: "https://media1.tenor.com/m/UEH1LnwmU18AAAAd/cute-love.gif",
+                text: "Desde el 11 de junio, mis días tienen un color diferente gracias a ti."
+            },
+            {
+                // Ejemplo de cómo poner una foto tuya:
+                media: "fotos/nuestra-foto-1.jpg", 
+                text: "Dos meses sonando a nuestra canción favorita. Y lo que falta."
+            },
+            {
+                media: "https://media1.tenor.com/m/NKF8aboOwykAAAAC/blackpink.gif",
+                text: "Como dirían por ahí... Blackpink in your area, pero tú en mi corazón."
+            },
+            {
+                media: "fotos/nuestra-foto-2.jpg",
+                text: "Me encanta descubrir todo lo que te hace sonreír, eres increíble."
+            },
+            {
+                media: "https://media.tenor.com/FAaWBtgInmAAAAAi/broncos-go-broncos.gif",
+                text: "Te quiero porque eres tú. Felices dos meses, mi niña hermosa. ❤️ J."
+            }
+        ];
+
+        let currentIndex = 0;
+        const mediaElement = document.getElementById('mainMedia');
+        const messageElement = document.getElementById('messageText');
+
+        function nextMemory() {
+            currentIndex = (currentIndex + 1) % memories.length;
+            
+            // Animación suave
+            mediaElement.style.opacity = '0';
+            messageElement.style.opacity = '0';
+            
+            setTimeout(() => {
+                mediaElement.src = memories[currentIndex].media;
+                messageElement.textContent = memories[currentIndex].text;
+                
+                mediaElement.style.opacity = '1';
+                messageElement.style.opacity = '1';
+            }, 300);
+        }
+
+        // --- 2. LÓGICA DEL CONTADOR DE TIEMPO ---
+        // Fecha de inicio: 11 de junio de 2026 a las 00:00:00
+        const startDate = new Date('2026-06-11T00:00:00').getTime();
+
+        function updateCounter() {
+            const now = new Date().getTime();
+            const difference = now - startDate;
+
+            const days = Math.floor(difference / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((difference % (1000 * 60)) / 1000);
+
+            document.getElementById('timeCounter').innerHTML = 
+                `${days} días, ${hours} hs, ${minutes} min y ${seconds} seg <br> a tu lado.`;
+        }
+
+        // Actualizar el contador cada segundo
+        setInterval(updateCounter, 1000);
+        updateCounter(); // Llamada inicial
+
+        // --- 3. EFECTO DE CORAZONES FLOTANTES ---
+        function createHearts() {
+            const container = document.getElementById('hearts');
+            const heartsCount = 25;
+
+            for (let i = 0; i < heartsCount; i++) {
+                const heart = document.createElement('div');
+                heart.className = 'heart';
+                // Mezclar un poco los corazones
+                heart.innerHTML = Math.random() > 0.5 ? '❤️' : '✨';
+                heart.style.left = Math.random() * 100 + '%';
+                heart.style.animationDuration = (Math.random() * 5 + 4) + 's';
+                heart.style.animationDelay = (Math.random() * 5) + 's';
+                // Diferentes tamaños
+                heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                container.appendChild(heart);
+            }
+        }
+        createHearts();
+
+        // --- 4. LÓGICA DEL AUDIO (Igual a tu versión anterior) ---
+        let isPlaying = false;
+        const audioElement = document.getElementById('backgroundMusic');
+        const musicBtn = document.getElementById('musicBtn');
+
+        function toggleMusic() {
+            if (!isPlaying) {
+                audioElement.play().then(() => {
+                    isPlaying = true;
+                    musicBtn.innerHTML = '🔊';
+                    musicBtn.classList.add('playing');
+                });
+            } else {
+                audioElement.pause();
+                isPlaying = false;
+                musicBtn.innerHTML = '🎵';
+                musicBtn.classList.remove('playing');
+            }
+        }
+
+        // Autoplay al primer clic en cualquier parte de la pantalla
+        document.addEventListener('click', function initAudio() {
+            if (!isPlaying) {
+                audioElement.play().then(() => {
+                    isPlaying = true;
+                    musicBtn.innerHTML = '🔊';
+                    musicBtn.classList.add('playing');
+                }).catch(e => {});
+            }
+            document.removeEventListener('click', initAudio);
+        }, { once: true });
+
+    </script>
+</body>
+</html>
