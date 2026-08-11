@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Felices 2 Meses, Karen ❤️</title>
+    <title>Felices 2 Meses, mi Karen ❤️</title>
     <style>
         body {
             margin: 0;
@@ -12,15 +12,30 @@
             justify-content: center;
             align-items: center;
             min-height: 100vh;
-            /* Fondo romántico de noche estrellada */
-            background: linear-gradient(to bottom, #1a0b2e, #4b1d52, #e55d87);
+            background: linear-gradient(to bottom, #0f0c29, #302b63, #24243e);
             color: white;
             font-family: 'Arial', sans-serif;
             overflow: hidden;
             position: relative;
         }
 
-        /* Contenedor de corazones flotantes */
+        /* Letras pequeñas rectas en la parte inferior */
+        .border-text {
+            position: fixed;
+            bottom: 25px;
+            left: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 13px;
+            color: rgba(255, 255, 255, 0.5);
+            letter-spacing: 3px;
+            pointer-events: none;
+            z-index: 5;
+            font-family: 'Georgia', serif;
+            text-shadow: 0 0 5px rgba(255,255,255,0.2);
+        }
+
+        /* Contenedor de corazones de fondo */
         .hearts-container {
             position: absolute;
             top: 0;
@@ -36,28 +51,32 @@
             bottom: -50px;
             font-size: 20px;
             animation: floatUp linear infinite;
-            opacity: 0.7;
+            opacity: 0.5;
         }
 
         @keyframes floatUp {
-            to {
-                transform: translateY(-120vh) rotate(360deg);
-            }
+            to { transform: translateY(-120vh) rotate(360deg); }
         }
 
         /* Tarjeta principal con efecto cristal */
         .glass-card {
-            background: rgba(255, 255, 255, 0.1);
+            background: rgba(255, 255, 255, 0.05);
             backdrop-filter: blur(15px);
             -webkit-backdrop-filter: blur(15px);
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 25px;
             padding: 40px 30px;
             text-align: center;
             z-index: 10;
             max-width: 90%;
-            width: 400px;
-            box-shadow: 0 15px 35px rgba(0,0,0,0.3);
+            width: 420px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.5);
+            animation: latido 4s infinite alternate;
+        }
+
+        @keyframes latido {
+            0% { transform: scale(1); box-shadow: 0 15px 35px rgba(0,0,0,0.5); }
+            100% { transform: scale(1.02); box-shadow: 0 15px 50px rgba(255, 105, 180, 0.2); }
         }
 
         h1 {
@@ -65,77 +84,78 @@
             font-size: 2.2em;
             color: #ff9a9e;
             font-family: 'Georgia', serif;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.4);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.6);
         }
 
-        /* Contador de tiempo */
         .counter {
-            font-size: 1.2em;
+            font-size: 1.1em;
             margin-bottom: 25px;
             color: #fdfbfb;
-            background: rgba(0,0,0,0.2);
-            padding: 10px;
-            border-radius: 10px;
+            background: rgba(0,0,0,0.3);
+            padding: 12px;
+            border-radius: 12px;
             font-weight: bold;
+            border: 1px solid rgba(255,255,255,0.1);
         }
 
-        /* Contenedor dinámico de fotos/gifs */
         .media-container {
             margin: 20px 0;
-            height: 250px;
+            height: 280px;
             display: flex;
             justify-content: center;
             align-items: center;
+            position: relative;
         }
 
         .media-element {
             max-width: 100%;
             max-height: 100%;
             border-radius: 15px;
-            border: 3px solid #ff9a9e;
-            box-shadow: 0 0 20px rgba(255, 154, 158, 0.5);
+            border: 2px solid #ff9a9e;
+            box-shadow: 0 0 25px rgba(255, 154, 158, 0.4);
             transition: all 0.5s ease;
+            object-fit: cover;
         }
 
         .message-text {
-            font-size: 1.3em;
+            font-size: 1.25em;
             margin: 20px 0;
             font-style: italic;
             min-height: 80px;
             display: flex;
             align-items: center;
             justify-content: center;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+            text-shadow: 1px 1px 3px rgba(0,0,0,0.8);
+            line-height: 1.4;
         }
 
-        /* Botón para avanzar */
         .next-btn {
-            background: linear-gradient(45deg, #ff9a9e 0%, #fecfef 99%, #fecfef 100%);
+            background: linear-gradient(45deg, #ff9a9e, #fecfef);
             border: none;
             padding: 12px 30px;
             border-radius: 25px;
             font-size: 1.1em;
             font-weight: bold;
-            color: #4b1d52;
+            color: #302b63;
             cursor: pointer;
             box-shadow: 0 5px 15px rgba(255, 154, 158, 0.4);
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s;
+            margin-top: 10px;
         }
 
         .next-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 8px 20px rgba(255, 154, 158, 0.6);
+            transform: translateY(-3px) scale(1.05);
+            box-shadow: 0 8px 25px rgba(255, 154, 158, 0.6);
         }
 
-        /* Botón de música */
         .music-btn {
             position: fixed;
             bottom: 20px;
             left: 20px;
             z-index: 100;
-            background: rgba(255, 255, 255, 0.2);
+            background: rgba(255, 255, 255, 0.1);
             backdrop-filter: blur(5px);
-            border: 2px solid white;
+            border: 1px solid rgba(255,255,255,0.3);
             border-radius: 50%;
             width: 60px;
             height: 60px;
@@ -149,83 +169,169 @@
         }
 
         .music-btn.playing {
-            background: rgba(255, 154, 158, 0.5);
+            background: rgba(255, 154, 158, 0.4);
             border-color: #ff9a9e;
-            box-shadow: 0 0 15px #ff9a9e;
+            box-shadow: 0 0 20px rgba(255, 154, 158, 0.6);
+        }
+
+        /* --- ESTILOS DEL MENSAJE SORPRESA --- */
+        .surprise-overlay {
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.8);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 1s ease;
+        }
+
+        .surprise-overlay.show {
+            opacity: 1;
+        }
+
+        .surprise-content {
+            text-align: center;
+            transform: scale(0.5);
+            transition: transform 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        .surprise-overlay.show .surprise-content {
+            transform: scale(1);
+        }
+
+        .surprise-heart {
+            font-size: 100px;
+            animation: pulse-heart 1s infinite alternate;
+            text-shadow: 0 0 50px rgba(255,0,0,0.8);
+        }
+
+        .surprise-text {
+            font-size: 4em;
+            font-weight: bold;
+            color: #fff;
+            font-family: 'Georgia', serif;
+            margin-top: 10px;
+            text-shadow: 0 0 20px #ff0055, 0 0 40px #ff0055;
+        }
+
+        @keyframes pulse-heart {
+            0% { transform: scale(1); }
+            100% { transform: scale(1.2); }
+        }
+
+        /* --- ESTILOS DEL RASTRO MÁGICO (PARTÍCULAS) --- */
+        .trail-particle {
+            position: fixed;
+            pointer-events: none;
+            border-radius: 50%;
+            z-index: 9998;
+            animation: fadeParticle 1s ease-out forwards;
+        }
+
+        @keyframes fadeParticle {
+            0% { transform: scale(1) translateY(0); opacity: 1; }
+            100% { transform: scale(0) translateY(-20px); opacity: 0; }
         }
 
         @media (max-width: 768px) {
             h1 { font-size: 1.8em; }
-            .counter { font-size: 1em; }
-            .media-container { height: 200px; }
-            .message-text { font-size: 1.1em; }
+            .glass-card { padding: 30px 20px; }
+            .media-container { height: 230px; }
+            .border-text { font-size: 10px; bottom: 15px; } /* Ajuste para celular */
+            .surprise-text { font-size: 2.5em; }
+            .surprise-heart { font-size: 80px; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Contenedor de corazones -->
+    <!-- Rastro de partículas mágicas -->
+    <div id="trail-container"></div>
+
+    <!-- Letras pequeñas en el borde inferior -->
+    <div class="border-text">
+        Jasson y Karen • Nuestra historia desde el 11 de junio de 2026
+    </div>
+
     <div class="hearts-container" id="hearts"></div>
 
-    <!-- Tarjeta principal -->
+    <!-- Mensaje Sorpresa -->
+    <div class="surprise-overlay" id="surpriseBox">
+        <div class="surprise-content">
+            <div class="surprise-heart">❤️</div>
+            <div class="surprise-text">¡Te amooo!</div>
+        </div>
+    </div>
+
     <div class="glass-card">
-        <h1>Felices 2 Meses, Karen ❤️</h1>
+        <h1>Felices 2 Meses, mi niña ❤️</h1>
         
-        <!-- Contador -->
         <div class="counter" id="timeCounter">Calculando nuestro tiempo...</div>
 
-        <!-- Contenedor de Imagen/GIF -->
         <div class="media-container">
             <img src="https://media1.tenor.com/m/UEH1LnwmU18AAAAd/cute-love.gif" 
-                 alt="Momento especial" 
+                 alt="Recuerdo" 
                  class="media-element" 
                  id="mainMedia">
         </div>
 
-        <!-- Mensaje -->
         <div class="message-text" id="messageText">
-            "Desde el 11 de junio, mis días tienen un color diferente gracias a ti."
+            "11 de junio... el día que mi suerte cambió por completo gracias a ti."
         </div>
 
-        <!-- Botón -->
         <button class="next-btn" onclick="nextMemory()">
             Siguiente recuerdo ✨
         </button>
     </div>
 
-    <!-- Botón de música -->
     <button class="music-btn" id="musicBtn" onclick="toggleMusic()">🎵</button>
     
-    <!-- AUDIO: Coloca aquí el enlace a su canción -->
     <audio id="backgroundMusic" loop style="display: none;">
         <source src="TU_ENLACE_A_LA_CANCION_AQUI.mp3" type="audio/mpeg">
     </audio>
 
     <script>
-        // --- 1. CONFIGURACIÓN DE LOS MENSAJES Y FOTOS ---
-        // Aquí puedes mezclar GIFs de internet con fotos tuyas de GitHub
+        // --- 1. LAS 11 FOTOS Y 7 GIFS (18 EN TOTAL) ---
         const memories = [
-            {
-                media: "https://media1.tenor.com/m/UEH1LnwmU18AAAAd/cute-love.gif",
-                text: "Desde el 11 de junio, mis días tienen un color diferente gracias a ti."
-            },
-            {
-                // Ejemplo de cómo poner una foto tuya:
-                media: "fotos/nuestra-foto-1.jpg", 
-                text: "Dos meses sonando a nuestra canción favorita. Y lo que falta."
-            },
-            {
-                media: "https://media1.tenor.com/m/NKF8aboOwykAAAAC/blackpink.gif",
-                text: "Como dirían por ahí... Blackpink in your area, pero tú en mi corazón."
-            },
-            {
-                media: "fotos/nuestra-foto-2.jpg",
-                text: "Me encanta descubrir todo lo que te hace sonreír, eres increíble."
-            },
-            {
-                media: "https://media.tenor.com/FAaWBtgInmAAAAAi/broncos-go-broncos.gif",
-                text: "Te quiero porque eres tú. Felices dos meses, mi niña hermosa. ❤️ J."
-            }
+            // GIF 1
+            { media: "https://media1.tenor.com/m/UEH1LnwmU18AAAAd/cute-love.gif", text: "11 de junio... el día que mi suerte cambió por completo gracias a ti." },
+            // FOTO 1
+            { media: "fotos/foto-1.jpg", text: "Cada vez que te veo, me doy cuenta de lo afortunado que soy al tenerte." },
+            // FOTO 2
+            { media: "fotos/foto-2.jpg", text: "Tus ojos cafés, sin lugar a duda, mi vista favorita de todo el mundo." },
+            // GIF 2
+            { media: "https://i.pinimg.com/originals/f0/e5/aa/f0e5aab386c235ef2dde843845d7d237.gif", text: "Me volvió loco tu forma de ser desde el primer momento." },
+            // FOTO 3
+            { media: "fotos/foto-3.jpg", text: "Dos meses de hacer equipo, de reírnos de todo y apoyarnos en las buenas y malas." },
+            // FOTO 4
+            { media: "fotos/foto-4.jpg", text: "Sinceramente, me encanta descubrir todo lo que te hace sonreír, eres increíble." },
+            // GIF 3
+            { media: "https://media1.tenor.com/m/NKF8aboOwykAAAAC/blackpink.gif", text: "Eres mi persona favorita en toda mi área." },
+            // FOTO 5
+            { media: "fotos/foto-5.jpg", text: "Admiro lo inteligente, fuerte y dedicada que eres con todo lo que haces." },
+            // FOTO 6
+            { media: "fotos/foto-6.jpg", text: "Contigo no solo me brillan los ojos, me brilla la vida entera." },
+            // GIF 4
+            { media: "https://i.pinimg.com/originals/de/bb/b3/debbb3b4ad77d0ee997f60cc4ba67457.gif", text: "Un abrazo tuyo es el único lugar donde siempre quiero quedarme." },
+            // FOTO 7
+            { media: "fotos/foto-7.jpg", text: "La mejor parte de mi día siempre será esa en la que estoy contigo." },
+            // FOTO 8
+            { media: "fotos/foto-8.jpg", text: "Y desde entonces soy porque tú eres... y juntos formamos el mejor equipo." },
+            // GIF 5
+            { media: "https://i.pinimg.com/originals/b9/dd/35/b9dd35e9fcdb661245855116aabd492d.gif", text: "Me hablaste de las cosas que te gustan, y ahora pienso en ti cada que las veo." },
+            // FOTO 9
+            { media: "fotos/foto-9.jpg", text: "No sé mucho sobre el futuro, pero me encanta imaginar cada día a tu lado." },
+            // FOTO 10
+            { media: "fotos/foto-10.jpg", text: "Oye guambra de ojos cafés, ¿qué me hiciste? Estoy tragadísimo de ti." },
+            // GIF 6
+            { media: "https://i.pinimg.com/originals/04/a8/a8/04a8a8b0e8d5126a5194a5664ebf02ab.gif", text: "Tanto tiempo, tantas personas, y pensar que todo este tiempo yo solo te buscaba a ti." },
+            // FOTO 11
+            { media: "fotos/foto-11.jpg", text: "Si supieras cómo me siento contigo, entenderías que para mí ya no existe nadie más." },
+            // GIF 7
+            { media: "https://media.tenor.com/FAaWBtgInmAAAAAi/broncos-go-broncos.gif", text: "Felices 2 meses, mi niña hermosa. Y que sean muchísimos más. ❤️ Tu J." }
         ];
 
         let currentIndex = 0;
@@ -235,9 +341,9 @@
         function nextMemory() {
             currentIndex = (currentIndex + 1) % memories.length;
             
-            // Animación suave
             mediaElement.style.opacity = '0';
             messageElement.style.opacity = '0';
+            mediaElement.style.transform = 'scale(0.95)';
             
             setTimeout(() => {
                 mediaElement.src = memories[currentIndex].media;
@@ -245,11 +351,11 @@
                 
                 mediaElement.style.opacity = '1';
                 messageElement.style.opacity = '1';
-            }, 300);
+                mediaElement.style.transform = 'scale(1)';
+            }, 400);
         }
 
-        // --- 2. LÓGICA DEL CONTADOR DE TIEMPO ---
-        // Fecha de inicio: 11 de junio de 2026 a las 00:00:00
+        // --- 2. CONTADOR DE TIEMPO DESDE EL 11 DE JUNIO ---
         const startDate = new Date('2026-06-11T00:00:00').getTime();
 
         function updateCounter() {
@@ -262,34 +368,70 @@
             const seconds = Math.floor((difference % (1000 * 60)) / 1000);
 
             document.getElementById('timeCounter').innerHTML = 
-                `${days} días, ${hours} hs, ${minutes} min y ${seconds} seg <br> a tu lado.`;
+                `${days} días, ${hours} hrs, ${minutes} min y ${seconds} seg <br> amándote.`;
         }
 
-        // Actualizar el contador cada segundo
         setInterval(updateCounter, 1000);
-        updateCounter(); // Llamada inicial
+        updateCounter();
 
-        // --- 3. EFECTO DE CORAZONES FLOTANTES ---
+        // --- 3. MENSAJE SORPRESA A LOS 11 SEGUNDOS ---
+        setTimeout(() => {
+            const surpriseBox = document.getElementById('surpriseBox');
+            surpriseBox.classList.add('show');
+            
+            setTimeout(() => {
+                surpriseBox.classList.remove('show');
+            }, 4000);
+        }, 11000);
+
+        // --- 4. RASTRO MÁGICO AL MOVER EL DEDO/MOUSE ---
+        const trailContainer = document.getElementById('trail-container');
+        
+        function createTrail(x, y) {
+            const particle = document.createElement('div');
+            particle.className = 'trail-particle';
+            
+            particle.innerHTML = Math.random() > 0.5 ? '✨' : '💕';
+            
+            particle.style.left = (x - 10) + 'px';
+            particle.style.top = (y - 10) + 'px';
+            particle.style.fontSize = (Math.random() * 10 + 10) + 'px';
+            
+            trailContainer.appendChild(particle);
+            
+            setTimeout(() => {
+                particle.remove();
+            }, 1000);
+        }
+
+        document.addEventListener('mousemove', (e) => {
+            if(Math.random() > 0.6) createTrail(e.clientX, e.clientY);
+        });
+
+        document.addEventListener('touchmove', (e) => {
+            if(Math.random() > 0.4) {
+                const touch = e.touches[0];
+                createTrail(touch.clientX, touch.clientY);
+            }
+        });
+
+        // --- 5. CORAZONES DE FONDO ---
         function createHearts() {
             const container = document.getElementById('hearts');
-            const heartsCount = 25;
-
-            for (let i = 0; i < heartsCount; i++) {
+            for (let i = 0; i < 20; i++) {
                 const heart = document.createElement('div');
                 heart.className = 'heart';
-                // Mezclar un poco los corazones
-                heart.innerHTML = Math.random() > 0.5 ? '❤️' : '✨';
+                heart.innerHTML = Math.random() > 0.5 ? '❤️' : '💜';
                 heart.style.left = Math.random() * 100 + '%';
-                heart.style.animationDuration = (Math.random() * 5 + 4) + 's';
+                heart.style.animationDuration = (Math.random() * 5 + 5) + 's';
                 heart.style.animationDelay = (Math.random() * 5) + 's';
-                // Diferentes tamaños
-                heart.style.fontSize = (Math.random() * 15 + 10) + 'px';
+                heart.style.fontSize = (Math.random() * 10 + 10) + 'px';
                 container.appendChild(heart);
             }
         }
         createHearts();
 
-        // --- 4. LÓGICA DEL AUDIO (Igual a tu versión anterior) ---
+        // --- 6. MÚSICA ---
         let isPlaying = false;
         const audioElement = document.getElementById('backgroundMusic');
         const musicBtn = document.getElementById('musicBtn');
@@ -309,7 +451,6 @@
             }
         }
 
-        // Autoplay al primer clic en cualquier parte de la pantalla
         document.addEventListener('click', function initAudio() {
             if (!isPlaying) {
                 audioElement.play().then(() => {
