@@ -19,22 +19,6 @@
             position: relative;
         }
 
-        /* Letras pequeñas rectas en la parte inferior - CORREGIDO */
-        .border-text {
-            position: fixed;
-            bottom: 15px; /* Más pegado al borde */
-            left: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 13px;
-            color: rgba(255, 255, 255, 0.7);
-            letter-spacing: 3px;
-            pointer-events: none;
-            z-index: 20; /* ¡AQUÍ ESTÁ LA SOLUCIÓN! Mayor a 10 para estar al frente */
-            font-family: 'Georgia', serif;
-            text-shadow: 0px 2px 4px rgba(0,0,0,0.8); /* Sombra oscura para que resalte más */
-        }
-
         /* Contenedor de corazones de fondo */
         .hearts-container {
             position: absolute;
@@ -67,7 +51,7 @@
             border-radius: 25px;
             padding: 40px 30px;
             text-align: center;
-            z-index: 10; /* La tarjeta es la capa 10 */
+            z-index: 10;
             max-width: 90%;
             width: 420px;
             box-shadow: 0 15px 35px rgba(0,0,0,0.5);
@@ -240,8 +224,6 @@
             h1 { font-size: 1.8em; }
             .glass-card { padding: 30px 20px; }
             .media-container { height: 230px; }
-            /* Se mantiene el z-index alto también en celulares */
-            .border-text { font-size: 10px; bottom: 10px; z-index: 20; }
             .surprise-text { font-size: 2.5em; }
             .surprise-heart { font-size: 80px; }
         }
@@ -251,7 +233,9 @@
 
     <!-- Rastro de partículas mágicas -->
     <div id="trail-container"></div>
-
+    
+    <!-- Contenedor de corazones de fondo (¡ESTO FALTABA!) -->
+    <div class="hearts-container" id="hearts"></div>
     
     <!-- Mensaje Sorpresa -->
     <div class="surprise-overlay" id="surpriseBox">
@@ -292,41 +276,41 @@
         // --- 1. LAS 11 FOTOS Y 7 GIFS (18 EN TOTAL) ---
         const memories = [
             // GIF 1
-            { media: "https://media1.tenor.com/m/UEH1LnwmU18AAAAd/cute-love.gif", text: "11 de junio... el día que mi suerte cambió por completo gracias a ti." },
+            { media: "https://i.pinimg.com/originals/26/5c/f1/265cf1d1cc3255ae5f1344b085610e7f.gif", text: "11 de junio... el mejor día de mi vida, te amo." },
             // FOTO 1
             { media: "foto-1.jpg", text: "Cada vez que te veo, me doy cuenta de lo afortunado que soy al tenerte." },
             // FOTO 2
-            { media: "foto-2.jpg", text: "Tus ojos cafés, sin lugar a duda, mi vista favorita de todo el mundo." },
+            { media: "foto-2.jpg", text: "Tomar de tu mano cada uno de esos días me llena de felicidad, siempre quiero tenerte a mi lado." },
             // GIF 2
-            { media: "https://i.pinimg.com/originals/f0/e5/aa/f0e5aab386c235ef2dde843845d7d237.gif", text: "Me volvió loco tu forma de ser desde el primer momento." },
+            { media: "https://i.pinimg.com/originals/a8/81/e2/a881e2cffe71075591c6ca8a6b86b2f9.gif", text: "Me volvió loco tu forma de ser desde el primer momento." },
             // FOTO 3
-            { media: "foto-3.jpg", text: "Dos meses de hacer equipo, de reírnos de todo y apoyarnos en las buenas y malas." },
+            { media: "foto-3.jpg", text: "Dos meses de ser noviecitos, la mejor dupla, el mejor equipo🐸​🐺​." },
             // FOTO 4
-            { media: "foto-4.jpg", text: "Sinceramente, me encanta descubrir todo lo que te hace sonreír, eres increíble." },
+            { media: "foto-4.jpg", text: "Sinceramente eres la novia mas bonita del mundo mundial." },
             // GIF 3
-            { media: "https://media1.tenor.com/m/NKF8aboOwykAAAAC/blackpink.gif", text: "Eres mi persona favorita en toda mi área." },
+            { media: "https://i.pinimg.com/originals/5e/d4/54/5ed4547d2a1f8d6b3670f681ea926692.gif", text: "Eres mi amooooor, mi kiki." },
             // FOTO 5
-            { media: "foto-5.jpg", text: "Admiro lo inteligente, fuerte y dedicada que eres con todo lo que haces." },
+            { media: "foto-5.jpg", text: "Admiro lo inteligente, linda, dedicada que eres, gracias por estar en mi vida." },
             // FOTO 6
             { media: "foto-6.jpg", text: "Contigo no solo me brillan los ojos, me brilla la vida entera." },
             // GIF 4
-            { media: "https://i.pinimg.com/originals/de/bb/b3/debbb3b4ad77d0ee997f60cc4ba67457.gif", text: "Un abrazo tuyo es el único lugar donde siempre quiero quedarme." },
+            { media: "https://i.pinimg.com/originals/a1/da/1f/a1da1f6d81be542a1630fe46fcf7afbd.gif", text: "Un abrazo tuyo es el único lugar donde siempre quiero quedarme." },
             // FOTO 7
             { media: "foto-7.JPG", text: "La mejor parte de mi día siempre será esa en la que estoy contigo." },
             // FOTO 8
-            { media: "foto-8.jpg", text: "Y desde entonces soy porque tú eres... y juntos formamos el mejor equipo." },
+            { media: "foto-8.jpg", text: "Mi hermosa kiki, te amo, amo tu belleza, amo la forma que me quieres, amo como me haces reír, amo como la pasamos jutnos, amo tus besos, amo tus ojos, amo tu sonrisa simplemente te amoooo" },
             // GIF 5
-            { media: "https://i.pinimg.com/originals/b9/dd/35/b9dd35e9fcdb661245855116aabd492d.gif", text: "Me hablaste de las cosas que te gustan, y ahora pienso en ti cada que las veo." },
+            { media: "https://i.pinimg.com/originals/b1/42/2f/b1422fb9dfe6d682ed2ca0d41c015f62.gif", text: "Me hablaste de las cosas que te gustan, y ahora pienso en ti cada que las veo." },
             // FOTO 9
             { media: "foto-9.jpg", text: "No sé mucho sobre el futuro, pero me encanta imaginar cada día a tu lado." },
             // FOTO 10
-            { media: "foto-10.jpg", text: "Oye guambra de ojos cafés, ¿qué me hiciste? Estoy tragadísimo de ti." },
+            { media: "foto-10.jpg", text: "Amo tu forma de ser, me enamore desde que te conocí, me vuelves loco y te amoooo hoy y siempre." },
             // GIF 6
-            { media: "https://i.pinimg.com/originals/04/a8/a8/04a8a8b0e8d5126a5194a5664ebf02ab.gif", text: "Tanto tiempo, tantas personas, y pensar que todo este tiempo yo solo te buscaba a ti." },
+            { media: "https://i.pinimg.com/originals/7f/a6/dc/7fa6dc089760e85809d63cdcd4e885e4.gif", text: "Tanto tiempo, tantas personas, y pensar que todo este tiempo yo solo te buscaba a ti." },
             // FOTO 11
-            { media: "foto-11.jpg", text: "Si supieras cómo me siento contigo, entenderías que para mí ya no existe nadie más." },
+            { media: "foto-11.jpg", text: "Si supieras cómo me siento contigo, tu me complementas, en estos dos meses he sido tan feliz que no puedo explicarlo con un simple mensaje, te amo de todas las maneras posibles, me siento tan pleno de ser tuyo, me gusta que nos amemos todos los dias, te amo karen, te amo mucho, te amaria de cualquier forma, en cualquier mundo, con cualquier pasado." },
             // GIF 7
-            { media: "https://media.tenor.com/FAaWBtgInmAAAAAi/broncos-go-broncos.gif", text: "Felices 2 meses, mi niña hermosa. Y que sean muchísimos más. ❤️ Tu J." }
+            { media: "https://i.pinimg.com/originals/25/c1/9d/25c19dc85d7545f1ef5135de05c462bc.gif", text: "Felices 2 meses, mi kiki hermosa. Y que sean muchísimos más. ❤️ Tu J." }
         ];
 
         let currentIndex = 0;
